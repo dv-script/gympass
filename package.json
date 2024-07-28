@@ -8,7 +8,8 @@
     "build": "tsup src/server.ts --out-dir build",
     "start": "node build/server.js",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +25,7 @@
   },
   "devDependencies": {
     "@types/node": "20.14.12",
+    "@vitest/ui": "2.0.4",
     "globals": "15.8.0",
     "prisma": "^5.17.0",
     "tsup": "^8.2.3",
