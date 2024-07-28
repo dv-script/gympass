@@ -6,7 +6,7 @@ export class UserInMemoryRepository implements UserRepository {
 
   async create(data: Prisma.UserCreateInput): Promise<User> {
     const user = {
-      id: `user-${this.users.length + 1}`,
+      id: `${this.users.length + 1}`,
       name: data.name,
       email: data.email,
       password_hash: data.password_hash,
@@ -17,7 +17,12 @@ export class UserInMemoryRepository implements UserRepository {
 
     return user;
   }
+
   async findByEmail(email: string): Promise<User | null> {
     return this.users.find((user) => user.email === email) || null;
+  }
+
+  async findById(id: string): Promise<User | null> {
+    return this.users.find((user) => user.id === id) || null;
   }
 }
