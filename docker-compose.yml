@@ -1,0 +1,13 @@
+services:
+  gympass-postgres:
+    image: "bitnami/postgresql:latest"
+    restart: always
+    container_name: gympass-postgres
+    environment:
+      - POSTGRESQL_USERNAME=docker
+      - POSTGRESQL_PASSWORD=docker
+      - POSTGRESQL_DATABASE=gympass
+    ports:
+      - "5432:5432"
+    volumes:
+      - ~/.docker/data/postgres:/var/lib/postgresql/data
