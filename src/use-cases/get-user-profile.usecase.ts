@@ -1,6 +1,4 @@
 import { UserRepository } from "@/repositories/user.repository";
-import { InvalidCredentialsError } from "./errors/invalid-credentials.error";
-import { compare } from "bcrypt";
 import { User } from "@prisma/client";
 import { ResourceNotFoundError } from "./errors/resource-not-found.error";
 
@@ -22,7 +20,7 @@ export class GetUserProfileUseCase {
 
     if (!user) {
       throw new ResourceNotFoundError();
-    } 
+    }
 
     return { user };
   }
