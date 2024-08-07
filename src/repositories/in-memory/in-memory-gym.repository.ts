@@ -28,4 +28,16 @@ export class InMemoryGymRepository implements GymRepository {
   async findByTitle(title: string): Promise<Gym | null> {
     return this.gyms.find((gym) => gym.title === title) || null;
   }
+
+  async searchMany({
+    query,
+    page,
+  }: {
+    query: string;
+    page: number;
+  }): Promise<Gym[] | null> {
+    return this.gyms
+      .filter((gym) => gym.title.includes(query))
+      .slice((page - 1) * 20, page * 20);
+  }
 }

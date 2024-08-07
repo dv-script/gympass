@@ -30,4 +30,18 @@ export class PrismaGymRepository implements GymRepository {
 
     return gym;
   }
+
+  async searchMany({ query, page, }: { query: string; page: number; }): Promise<Gym[] | null> {
+    const gyms = await db.gym.findMany({
+      where: {
+        title: {
+          contains: query,
+        },
+      },
+      skip: page * 10,
+      take: 10,
+    });
+
+    return gyms;
+  }
 }
