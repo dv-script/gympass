@@ -11,4 +11,5 @@ export interface GymRepository {
     query: string;
     page: number;
   }): Promise<Gym[] | null>;
+  findManyNearby({ latitude, longitude }: { latitude: number; longitude: number }): Promise<Gym[] | null>;
 }

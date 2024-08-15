@@ -44,4 +44,21 @@ export class PrismaGymRepository implements GymRepository {
 
     return gyms;
   }
+
+  async findManyNearby({ latitude, longitude }: { latitude: number; longitude: number; }): Promise<Gym[] | null> {
+    const gyms = await db.gym.findMany({
+      where: {
+        latitude: {
+          lte: latitude + 0.1,
+          gte: latitude - 0.1,
+        },
+        longitude: {
+          lte: longitude + 0.1,
+          gte: longitude - 0.1,
+        },
+      },
+    });
+
+    return gyms;
+  }
 }
