@@ -31,7 +31,13 @@ export class PrismaGymRepository implements GymRepository {
     return gym;
   }
 
-  async searchMany({ query, page, }: { query: string; page: number; }): Promise<Gym[] | null> {
+  async searchMany({
+    query,
+    page,
+  }: {
+    query: string;
+    page: number;
+  }): Promise<Gym[] | null> {
     const gyms = await db.gym.findMany({
       where: {
         title: {
@@ -45,19 +51,17 @@ export class PrismaGymRepository implements GymRepository {
     return gyms;
   }
 
-  async findManyNearby({ latitude, longitude }: { latitude: number; longitude: number; }): Promise<Gym[] | null> {
-    const gyms = await db.gym.findMany({
-      where: {
-        latitude: {
-          lte: latitude + 0.1,
-          gte: latitude - 0.1,
-        },
-        longitude: {
-          lte: longitude + 0.1,
-          gte: longitude - 0.1,
-        },
-      },
-    });
+  async findManyNearby({
+    latitude,
+    longitude,
+  }: {
+    latitude: number;
+    longitude: number;
+  }): Promise<Gym[] | null> {
+    const gyms = await db.$queryRaw<Gym[]>`
+      SELECT * FROM gyms 
+      WHERE ( 6371 * acos( cos( radians(${latitude}) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(${longitude}) ) + sin( radians(${latitude}) ) * sin( radians( latitude ) ) ) ) <= 10 
+    `;
 
     return gyms;
   }
