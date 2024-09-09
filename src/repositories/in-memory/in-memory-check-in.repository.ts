@@ -20,6 +20,22 @@ export class InMemoryCheckInRepository implements CheckInRepository {
     return checkIn;
   }
 
+  async update(data: CheckIn): Promise<CheckIn> {
+    const checkIn = this.checkIns.findIndex(
+      (checkIn) => checkIn.id === data.id
+    );
+
+    if (checkIn >= 0) {
+      this.checkIns[checkIn] = data;
+    }
+
+    return data;
+  }
+
+  async findById(id: string): Promise<CheckIn | null> {
+    return this.checkIns.find((checkIn) => checkIn.id === id) || null;
+  }
+
   async findByUserIdOnDate({
     userId,
     date,

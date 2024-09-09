@@ -12,6 +12,17 @@ export class PrismaCheckInRepository implements CheckInRepository {
     return checkIn;
   }
 
+  async update(data: Prisma.CheckInUncheckedCreateInput): Promise<CheckIn> {
+    const checkIn = await db.checkIn.update({
+      where: {
+        id: data.id,
+      },
+      data,
+    });
+
+    return checkIn;
+  }
+
   async findByUserIdOnDate({
     userId,
     date,
@@ -34,6 +45,16 @@ export class PrismaCheckInRepository implements CheckInRepository {
     }
 
     return checkInOnSameDay;
+  }
+
+  async findById(id: string): Promise<CheckIn | null> {
+    const checkIn = await db.checkIn.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    return checkIn;
   }
 
   async findManyByUserId({
