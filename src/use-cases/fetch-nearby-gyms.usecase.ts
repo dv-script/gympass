@@ -2,7 +2,7 @@ import { GymRepository } from "@/repositories/gym.repository";
 import { Gym } from "@prisma/client";
 import { ResourceNotFoundError } from "./errors/resource-not-found.error";
 
-interface FetchNearbyGymsCaseRequest {
+interface FetchNearbyGymsUseCaseRequest {
   userLatitude: number;
   userLongitude: number;
 }
@@ -17,7 +17,7 @@ export class FetchNearbyGymsUseCase {
   async execute({
     userLatitude,
     userLongitude,
-  }: FetchNearbyGymsCaseRequest): Promise<FetchNearbyGymsUseCaseResponse> {
+  }: FetchNearbyGymsUseCaseRequest): Promise<FetchNearbyGymsUseCaseResponse> {
     const gyms = await this.gymRepository.findManyNearby({
       latitude: userLatitude,
       longitude: userLongitude,
