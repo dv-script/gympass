@@ -16,7 +16,6 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@prisma/client": "5.17.0",
     "@types/bcrypt": "5.0.2",
     "bcrypt": "5.1.1",
     "dayjs": "1.11.12",
@@ -25,10 +24,13 @@
     "zod": "3.23.8"
   },
   "devDependencies": {
+    "@prisma/client": "5.19.1",
     "@types/node": "20.14.12",
     "@vitest/ui": "2.0.4",
     "globals": "15.8.0",
-    "prisma": "^5.17.0",
+    "i": "0.3.7",
+    "npm": "10.8.3",
+    "prisma": "5.19.1",
     "tsup": "^8.2.3",
     "tsx": "^4.16.2",
     "vite-tsconfig-paths": "4.3.2",
